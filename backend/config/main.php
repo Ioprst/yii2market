@@ -14,6 +14,7 @@ return [
     'modules' => [],
     'language' => 'ru',
     'sourceLanguage'=>'ru',
+    'defaultRoute' => 'order/index/',
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-backend',
