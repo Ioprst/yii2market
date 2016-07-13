@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <div class="login-box">
         <div class="login-box-body">
-            <p class="login-box-msg">Для просмотра содержимого необходимо авторизиваться</p>
+            <p class="login-box-msg">Для просмотра содержимого необходимо авторизоваться</p>
             <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
