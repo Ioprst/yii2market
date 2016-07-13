@@ -39,6 +39,7 @@ class ProductController extends CommonController
         $model = new Product();
         $post = Yii::$app->request->post();
         if ($model->load($post) && $model->save() && $model->saveOptions($post)) {
+               $model->uploadPhoto();
                Yii::$app->response->format = 'json';
                return ['result:ok'];
         } else {
@@ -66,6 +67,7 @@ class ProductController extends CommonController
 
         $productOptionValues = ProductOptionValue::getOptionsValues($id);
         if ($model->load($post) && $model->save() && $model->saveOptions($post)) {
+            $model->uploadPhoto();
             Yii::$app->response->format = 'json';
             return ['result'=>'ok'];
         } else {

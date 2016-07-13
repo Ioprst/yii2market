@@ -18,7 +18,7 @@
                         <span class="category"><?=$model->category->name?></span>
                     </span>
                     <div class="ads-image">
-                        <img src="http://templatecycle.com/demo/bootclassified-v1.4/dist/images/item/tp-big/Image00014.jpg" alt="">
+                        <img src="<?=$model->photo?>" alt="">
                         <h1 class="pricetag"><?=$model->price?>р.</h1>
                         <div style="margin-top:20px;" class="Ads-Details">
                             <p><?=$model->description?></p>

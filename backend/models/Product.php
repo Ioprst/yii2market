@@ -8,6 +8,8 @@ use common\models\Essence;
 use  backend\models\Category;
 use backend\models\Option;
 use backend\models\OptionValue;
+use yii\helpers\FileHelper;
+use yii\web\UploadedFile;
 /**
  * This is the model class for table "product".
  *
@@ -42,6 +44,7 @@ class Product extends Essence
         return [
             [['name'], 'required'],
             [['description', 'color'], 'string'],
+            ['photo_file', 'image', 'skipOnEmpty' => false, 'on'=> ['create']],
             [['weight', 'count', 'price', 'tCategory', 'dCreate', 'dUpdate', 'tUserCreate', 'tUserUpdate'], 'integer'],
             [['name'], 'string', 'max' => 255],
         ];
@@ -65,7 +68,19 @@ class Product extends Essence
             'dUpdate' => 'Дата обновления',
             'tUserCreate' => 'Создал',
             'tUserUpdate' => 'Изменил',
+            'photo' => 'Фото',
+            'photo_file' => 'Фото',
         ];
+    }
+
+    public function beforeValidate()
+    {
+        if (parent::beforeValidate()) {
+            $this->photo_file = UploadedFile::getInstance($this, 'photo_file');
+            return true;
+        }
+
+        return false;
     }
 
     public function getCategory()

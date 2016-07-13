@@ -2,7 +2,7 @@
     <div class="item-img">
         <a href="/product/view?id=<?=$model->id?>">
             <div class="item-thumb">
-                <img alt="img" src="http://amrox.ru/image/206.png">
+                <img src="<?=$model->photo?>">
             </div>
         </a>
     </div>

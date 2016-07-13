@@ -4,6 +4,16 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 use  backend\models\Category;
+use kartik\file\FileInput;
+
+$options = [
+    'showCaption' => false,
+    'showRemove' => false,
+    'showUpload' => false,
+    'browseClass' => 'btn btn-primary btn-block',
+    'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+    'browseLabel' => 'Выбрать',
+];
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
@@ -18,6 +28,10 @@ use  backend\models\Category;
         ]]);
     ?>
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'photo_file')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => $options
+    ]); ?>
     <?= $form->field($model, 'tCategory')->dropDownList(Category::getCategoryList(), ['prompt' => 'Выбрать тест...']);?>
     <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
     <?= $form->field($model, 'weight')->textInput() ?>
