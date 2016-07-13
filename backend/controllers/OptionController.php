@@ -68,6 +68,8 @@ class OptionController extends CommonController
     {
         $model = new Option();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $optionValues= Yii::$app->request->post()['OptionValue'];
+            $this->saveOptionsValues($optionValues, $model);
             Yii::$app->response->format = 'json';
             return ['result:ok'];
         } else {
@@ -103,17 +105,7 @@ class OptionController extends CommonController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             $optionValues= Yii::$app->request->post()['OptionValue'];
-
-            foreach ($optionValues as $optionValue) {
-                if ($optionValue['id']) {
-                    $optionValueModel = OptionValue::findOne($optionValue['id']);
-                } else {
-                    $optionValueModel = new OptionValue();
-                }
-                $optionValueModel['text'] = $optionValue['text'];
-                $model->link('optionValues', $optionValueModel);
-            }
-
+            $this->saveOptionsValues($optionValues, $model);
             Yii::$app->response->format = 'json';
             return ['result'=>'ok'];
         } else {
@@ -133,6 +125,18 @@ class OptionController extends CommonController
         }
     }
 
+    protected function saveOptionsValues($optionValues, $model)
+    {
+       foreach ($optionValues as $optionValue) {
+            if ($optionValue['id']) {
+                $optionValueModel = OptionValue::findOne($optionValue['id']);
+            } else {
+                $optionValueModel = new OptionValue();
+            }
+            $optionValueModel['text'] = $optionValue['text'];
+            $model->link('optionValues', $optionValueModel);
+        }
+    }
     /**
      * Finds the ProductOption model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
