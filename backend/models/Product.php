@@ -4,7 +4,7 @@ namespace backend\models;
 
 use Yii;
 use common\models\Essence;
-use  backend\models\ProductCategory;
+use  backend\models\Category;
 /**
  * This is the model class for table "product".
  *
@@ -67,6 +67,6 @@ class Product extends Essence
 
     public function getCategory()
     {
-        return $this->hasOne(ProductCategory::className(), ['id' => 'tCategory']);
+        return $this->hasOne(Category::className(), ['id' => 'tCategory']);
     }
 }
