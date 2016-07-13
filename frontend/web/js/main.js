@@ -16,10 +16,10 @@ $(function() {
             dataType: 'json',
         })
         .success(function(data) {
-            console.log("success");
+            alert("Товар успешно заказан");
         })
         .error(function() {
-            alert("error");
+            alert("Не удалось заказать товар");
         })
         .always(function() {
             $(el).removeAttr('disabled');
