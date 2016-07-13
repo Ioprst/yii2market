@@ -22,6 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         Modal::begin([
                                             "id" => "new-ess",
                                             'header' => '<h4 class="modal-title">'.$options['title'].'</h4>',
+                                            'options' =>[
+                                                "class" =>'reset'
+                                            ],
                                             'toggleButton' => [
                                                 'label' => $options['title'],
                                                 'data-target'=>'#new-ess',
@@ -36,26 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                     //update modal form
                                     Modal::begin([
                                         "id" => "update-ess",
+                                        'options' =>[
+                                                "class" =>'reset'
+                                        ],
                                         'clientOptions' => false,
                                     ]);
                                     Modal::end();
                                 ?>
                             </p>
-
-                            <? //echo $this->render('_search', ['model' => $searchModel]); ?>
-
                             <?php \yii\widgets\Pjax::begin([
-                                //'clientOptions' => ['method' => 'POST'],
                                 'id'=> $options['container']
                             ]); ?>
 
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
-                                //'filterModel' => $searchModel,
                                 'tableOptions' => [
                                    'class' => 'table table-bordered table-hover dataTable'
                                 ],
-                                'layout'=>"{items}\n{summary}\n{pager}",
+                                'layout'=>"{items}\n{pager}\n<span class=\"summary\">{summary}</span",
                                 'summary' => "Отображается {begin} - {end} из {totalCount} записей",
                                 'rowOptions'=>function ($model, $key, $index, $grid) {
                                     $class = $index % 2 ? 'odd' : 'even';
