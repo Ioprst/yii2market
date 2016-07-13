@@ -7,11 +7,15 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+
+use backend\models\Product;
+use backend\models\ProductSearch;
 
 /**
  * Site controller
@@ -73,6 +77,20 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionCatalog()
+    {
+        $productsQuery = Product::find()->where('count > 0');
+        $dataProvider = new ActiveDataProvider([
+            'query' => $productsQuery,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+        return $this->render('//catalog/list', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
