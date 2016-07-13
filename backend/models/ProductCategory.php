@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 use common\models\Essence;
 /**
@@ -53,5 +54,10 @@ class ProductCategory extends Essence
             'tUserCreate' => 'Создал',
             'tUserUpdate' => 'Изменил',
         ];
+    }
+
+    public static function getCategoryList() {
+        $category = ProductCategory::find()->all();
+        return ArrayHelper::map($category, 'id', 'name');
     }
 }
