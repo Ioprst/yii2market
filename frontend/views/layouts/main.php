@@ -25,47 +25,55 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
-
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+<div id="main" class="wrap">
+    <div class="header">
+        <nav role="navigation" class="navbar navbar-top navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">      <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/">
+                                <i class="icon-location-2 icon-append"></i>
+                                <i class="icon-down-open-big"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/login">Вход</a></li>
+                        <li><a href="/signup">Регистрация</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
+    <nav role="navigation" class="navbar navbar-head">
+        <div class="container">
+            <div class="row search-top">
+                <div class="col-sm-2 reset">
+                    <div class="logo-container">
+                        <h1 class="logo-link">
+                            <a href="/">
+                            <span class="site-logo">Super Market</span>
+                            <span class="sub-logo">интернет-магазин</span>
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
+    <?= Alert::widget() ?>
+    <?= $content ?>
 </div>
 
 <footer class="footer">
