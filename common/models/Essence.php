@@ -4,7 +4,7 @@ namespace common\models;
 
 use Yii;
 use common\models\User;
-use yii\behaviors\TimeStampBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\db\Expression;
 use yii\helpers\FileHelper;
@@ -17,7 +17,7 @@ class Essence extends \yii\db\ActiveRecord
     {
         return [
             [
-                'class' => TimeStampBehavior::className(),
+                'class' => TimestampBehavior::className(),
                 'createdAtAttribute' => 'dCreate',
                 'updatedAtAttribute' => 'dUpdate',
             ],
