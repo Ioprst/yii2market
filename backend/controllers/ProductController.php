@@ -55,6 +55,47 @@ class ProductController extends CommonController
             }
         }
     }
+
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
+
+        var_dump(Yii::$app->request->post()['ProductOption']);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $productOptions = Yii::$app->request->post()['ProductOption'];
+
+            foreach ($productOptions as $productOption) {
+                /*if ($productOption['id']) {
+                    $optionValueModel = OptionValue::findOne($optionValue['id']);
+                } else {
+                    $optionValueModel = new OptionValue();
+                }
+                $optionValueModel['text'] = $optionValue['text'];
+                $model->link('optionValues', $optionValueModel);*/
+            }
+
+
+            Yii::$app->response->format = 'json';
+            return ['result'=>'ok'];
+        } else {
+            if(Yii::$app->request->isAjax) {
+                if ($model->errors) {
+                    Yii::$app->response->format = 'json';
+                    return  ['errors'=> $model->errors];
+                }
+               return $this->renderAjax('update', [
+                   'model' => $model,
+               ]);
+            } else {
+               return $this->render('update', [
+                   'model' => $model,
+               ]);
+            }
+        }
+    }
+
     /**
      * Finds the Product model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

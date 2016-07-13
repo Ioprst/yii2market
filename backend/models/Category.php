@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 
 use common\models\Essence;
 /**
- * This is the model class for table "product_category".
+ * This is the model class for table "category".
  *
  * @property integer $id
  * @property string $name
@@ -17,7 +17,7 @@ use common\models\Essence;
  * @property integer $tUserCreate
  * @property integer $tUserUpdate
  */
-class ProductCategory extends Essence
+class Category extends Essence
 {
     /**
      * @inheritdoc
@@ -57,7 +57,7 @@ class ProductCategory extends Essence
     }
 
     public static function getCategoryList() {
-        $category = ProductCategory::find()->all();
+        $category = Category::find()->all();
         return ArrayHelper::map($category, 'id', 'name');
     }
 }

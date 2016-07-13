@@ -3,21 +3,21 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\ProductCategory;
-use backend\models\ProductCategorySearch;
+use backend\models\Category;
+use backend\models\CategorySearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use backend\controllers\CommonController;
 
 /**
- * ProductCategoryController implements the CRUD actions for ProductCategory model.
+ * CategoryController implements the CRUD actions for Category model.
  */
-class ProductCategoryController extends CommonController
+class CategoryController extends CommonController
 {
     public function actionIndex()
     {
-        $searchModel = new ProductCategorySearch();
+        $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -28,7 +28,7 @@ class ProductCategoryController extends CommonController
 
     public function actionCreate()
     {
-        $model = new ProductCategory();
+        $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->response->format = 'json';
@@ -51,15 +51,15 @@ class ProductCategoryController extends CommonController
     }
 
     /**
-     * Finds the ProductCategory model based on its primary key value.
+     * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ProductCategory the loaded model
+     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ProductCategory::findOne($id)) !== null) {
+        if (($model = Category::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

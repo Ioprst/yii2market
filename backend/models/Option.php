@@ -8,7 +8,7 @@ use Yii;
 use common\models\Essence;
 
 /**
- * This is the model class for table "product_option".
+ * This is the model class for table "option".
  *
  * @property integer $id
  * @property string $name
@@ -20,7 +20,7 @@ use common\models\Essence;
  * @property integer $dUserUpdate
  * @property integer $dUserDelete
  */
-class ProductOption extends Essence
+class Option extends Essence
 {
     /**
      * @inheritdoc

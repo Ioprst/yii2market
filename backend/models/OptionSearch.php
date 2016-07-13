@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\ProductOption;
+use backend\models\Option;
 
 /**
- * ProductOptionSearch represents the model behind the search form about `backend\models\ProductOption`.
+ * OptionSearch represents the model behind the search form about `backend\models\Option`.
  */
-class ProductOptionSearch extends ProductOption
+class OptionSearch extends Option
 {
     /**
      * @inheritdoc
@@ -41,7 +41,7 @@ class ProductOptionSearch extends ProductOption
      */
     public function search($params)
     {
-        $query = ProductOption::find();
+        $query = Option::find();
 
         // add conditions that should always apply here
 

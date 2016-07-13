@@ -3,18 +3,18 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\ProductOption;
+use backend\models\Option;
 use backend\models\OptionValue;
-use backend\models\ProductOptionSearch;
+use backend\models\OptionSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use backend\controllers\CommonController;
 
 /**
- * ProductOptionController implements the CRUD actions for ProductOption model.
+ * OptionController implements the CRUD actions for Option model.
  */
-class ProductOptionController extends CommonController
+class OptionController extends CommonController
 {
 
     /**
@@ -23,7 +23,7 @@ class ProductOptionController extends CommonController
      */
     public function actionIndex()
     {
-        $searchModel = new ProductOptionSearch();
+        $searchModel = new OptionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -32,9 +32,25 @@ class ProductOptionController extends CommonController
         ]);
     }
 
+    public function actionList()
+    {
+        $options = Option::find()->all();
+        return $this->renderAjax('list', [
+            'options' => $options,
+        ]);
+    }
+
+    public function actionValueList($option)
+    {
+        $values = OptionValue::find()->where(['tOption' => $option])->all();
+        return $this->renderAjax('//option-value/dropdown', [
+            'values' => $values,
+        ]);
+    }
+
     public function actionCreate()
     {
-        $model = new ProductOption();
+        $model = new Option();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->response->format = 'json';
             return ['result:ok'];
@@ -110,7 +126,7 @@ class ProductOptionController extends CommonController
      */
     protected function findModel($id)
     {
-        if (($model = ProductOption::findOne($id)) !== null) {
+        if (($model = Option::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
