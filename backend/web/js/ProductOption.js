@@ -25,7 +25,7 @@
 
     App.ProductOption.prototype.removeOptionValue = function(id) {
         $.ajax({
-            url: '/admin/product-option/delete-value?id=' + id,
+            url: '/admin/option/delete-value?id=' + id,
             type: 'POST',
             dataType: 'json',
         })
