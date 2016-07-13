@@ -1,8 +1,7 @@
 <div class="item-box col-md-3 col-sm-4 col-xs-6">
     <div class="item-img">
         <a data-pjax="0" href="/product/view?id=<?=$model->id?>">
-            <div class="item-thumb">
-                <img src="<?=$model->photo?>">
+            <div style="background:url('<?=$model->photo?>')"class="item-thumb">
             </div>
         </a>
     </div>

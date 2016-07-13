@@ -196,6 +196,9 @@ form input[type="text"], form input[type="email"], form input[type="password"] {
     color: #fff;
 }
 .item-thumb {
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
     border: 1px solid #ddd;
     display: block;
     height: 100px;
