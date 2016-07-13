@@ -6,8 +6,10 @@ use Yii;
 use backend\models\Option;
 use backend\models\OptionValue;
 use backend\models\OptionSearch;
+use backend\models\Product;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 use backend\controllers\CommonController;
 
@@ -32,9 +34,22 @@ class OptionController extends CommonController
         ]);
     }
 
-    public function actionList()
+    public function actionList($product)
     {
-        $options = Option::find()->all();
+        if (!empty($product)) {
+            $productModel = Product::findOne($product);
+            $productModelOptions = $productModel->options;
+            $productModelOptionsIds = ArrayHelper::getColumn($productModelOptions, 'id');
+            $options = Option::find()->where(['not in','id', $productModelOptionsIds])->all();
+        }else {
+            $options = Option::find()->all();
+        }
+
+        if (empty($options)) {
+            Yii::$app->response->format = 'json';
+             return  ['error'=> 'Нет доступных опций'];
+        }
+
         return $this->renderAjax('list', [
             'options' => $options,
         ]);
@@ -45,6 +60,7 @@ class OptionController extends CommonController
         $values = OptionValue::find()->where(['tOption' => $option])->all();
         return $this->renderAjax('//option-value/dropdown', [
             'values' => $values,
+            'optionId'=> $option
         ]);
     }
 

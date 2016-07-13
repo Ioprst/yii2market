@@ -193,3 +193,14 @@ input.product-option.form-control  {
     float: left;
     margin-right: 10px;
 }
+.option-container  {
+    margin: 1px 1px 5px;
+    padding: 3px;
+}
+
+.option-container .option-label {
+    padding: 5px 0;
+}
+.option-container .remove-option-container {
+    float: right;
+}

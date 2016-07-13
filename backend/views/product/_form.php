@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-use  backend\models\ProductCategory;
+use  backend\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model backend\models\Product */
@@ -18,14 +18,23 @@ use  backend\models\ProductCategory;
         ]]);
     ?>
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'tCategory')->dropDownList(ProductCategory::getCategoryList(), ['prompt' => 'Выбрать тест...']);?>
+    <?= $form->field($model, 'tCategory')->dropDownList(Category::getCategoryList(), ['prompt' => 'Выбрать тест...']);?>
     <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
     <?= $form->field($model, 'weight')->textInput() ?>
     <?= $form->field($model, 'color')->textInput() ?>
     <?= $form->field($model, 'count')->textInput() ?>
     <?= $form->field($model, 'price')->textInput() ?>
     <div class="form-group">
+        <?php
+            echo $this->render('//product/options_list', ['model'=> $model, 'optionValues' => $optionValues]);
+        ?>
+    </div>
+    <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить', ['class' => ($model->isNewRecord ? 'btn btn-success save-ess' : 'btn btn-primary update-ess')]) ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>
+
+<?
+    $this->registerJsFile(Yii::getAlias('@web').'/js/Product.js');
+?>

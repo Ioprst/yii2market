@@ -3,13 +3,15 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Product;
-use backend\models\ProductSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 use backend\controllers\CommonController;
+use backend\models\Product;
+use backend\models\ProductSearch;
+use backend\models\Option;
+use backend\models\ProductOptionValue;
 
 /**
  * ProductController implements the CRUD actions for Product model.
@@ -35,8 +37,8 @@ class ProductController extends CommonController
     public function actionCreate()
     {
         $model = new Product();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        $post = Yii::$app->request->post();
+        if ($model->load($post) && $model->save() && $model->saveOptions($post)) {
                Yii::$app->response->format = 'json';
                return ['result:ok'];
         } else {
@@ -60,23 +62,10 @@ class ProductController extends CommonController
     {
         $model = $this->findModel($id);
 
-        var_dump(Yii::$app->request->post()['ProductOption']);
+        $post = Yii::$app->request->post();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $productOptions = Yii::$app->request->post()['ProductOption'];
-
-            foreach ($productOptions as $productOption) {
-                /*if ($productOption['id']) {
-                    $optionValueModel = OptionValue::findOne($optionValue['id']);
-                } else {
-                    $optionValueModel = new OptionValue();
-                }
-                $optionValueModel['text'] = $optionValue['text'];
-                $model->link('optionValues', $optionValueModel);*/
-            }
-
-
+        $productOptionValues = ProductOptionValue::getOptionsValues($id);
+        if ($model->load($post) && $model->save() && $model->saveOptions($post)) {
             Yii::$app->response->format = 'json';
             return ['result'=>'ok'];
         } else {
@@ -87,12 +76,45 @@ class ProductController extends CommonController
                 }
                return $this->renderAjax('update', [
                    'model' => $model,
+                   'optionValues' => $productOptionValues
                ]);
             } else {
                return $this->render('update', [
                    'model' => $model,
+                   'optionValues' => $productOptionValues
                ]);
             }
+        }
+    }
+
+    public function actionChangeValue($option, $product, $value)
+    {
+        if (!$option || !$product) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        $optionModel = ProductOptionValue::find()->where(['tProduct'=> $product, 'tOption'=> $option])->one();
+        $optionModel->tValue = $value;
+        $optionModel->save();
+
+        if(Yii::$app->request->isAjax) {
+            Yii::$app->response->format = 'json';
+            return ['result'=>'ok'];
+        }
+    }
+
+    public function actionDeleteOption($option, $product)
+    {
+        if (!$option || !$product) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        $optionModel = ProductOptionValue::find()->where(['tProduct'=> $product, 'tOption'=> $option])->one();
+        $optionModel->delete();
+
+        if(Yii::$app->request->isAjax) {
+            Yii::$app->response->format = 'json';
+            return ['result'=>'ok'];
         }
     }
 

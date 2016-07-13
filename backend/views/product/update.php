@@ -19,5 +19,6 @@ $this->params['breadcrumbs'][] = 'Update';
 <div class="modal-body">
     <?= $this->render('_form', [
         'model' => $model,
+        'optionValues' => $optionValues,
     ]) ?>
 </div>

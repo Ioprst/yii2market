@@ -38,6 +38,7 @@ class Option extends Essence
         return [
             [['description'], 'string'],
             [['dCreate', 'dUpdate', 'tUserCreate', 'tUserUpdate'], 'integer'],
+            [['name'], 'required'],
             [['name'], 'string', 'max' => 128],
         ];
     }
