@@ -23,7 +23,7 @@ class ProductCategory extends Essence
      */
     public static function tableName()
     {
-        return 'product_category';
+        return 'category';
     }
 
     /**
