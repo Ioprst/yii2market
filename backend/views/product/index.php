@@ -6,7 +6,6 @@ $this->title = 'Товары';
 $columns =  [
     'id',
     'name:text',
-    'description:text',
     'count:text',
     [
         'attribute' => 'tCategory',
