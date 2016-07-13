@@ -3,7 +3,7 @@
         <a class="panel-heading" aria-controls="collapseLink" aria-expanded="true" href="#collapseOpt" data-parent="#product-option-container" data-toggle="collapse" role="button">
             <h4 class="panel-title"> Значения</h4>
         </a>
-        <div class="panel-collapse collapse" id="collapseOpt">
+        <div class="panel-collapse collapse in" id="collapseOpt">
             <div class="panel-body box-edit">
                 <div class="form-group">
                     <button data-option="<?=$model->id?>" class="btn btn-primary btn-sm add-option-value" type="button">Добавить значение</button>
