@@ -1,3 +1,12 @@
+a:hover, a:active, a:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+.panel-heading {
+    display: block;
+}
+
 .main-sidebar {
     background: #222d32;
     left: 0;
@@ -161,6 +170,26 @@
 .table-bordered {
     border: 1px solid #f4f4f4;
 }
+
 .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td{
     border:1px solid #f4f4f4;
+}
+
+.grid-view .pagination {
+    float: left;
+}
+
+.grid-view .summary {
+    float: right;
+    margin: 20px 0;
+}
+
+.option-input-container {
+    margin-bottom: 10px;
+}
+
+input.product-option.form-control  {
+    width: 90%;
+    float: left;
+    margin-right: 10px;
 }
