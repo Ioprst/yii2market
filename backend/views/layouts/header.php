@@ -5,7 +5,7 @@ use yii\bootstrap\Dropdown;
 
 <header class="main-header">
 
-    <?= Html::a('<span class="logo-mini">ССП</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
+    <?= Html::a('<span class="logo-mini"></span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
     <nav class="navbar navbar-static-top" role="navigation">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
@@ -21,7 +21,7 @@ use yii\bootstrap\Dropdown;
                                 'id'=> "profile_dropdown",
                                 'items' => [
                                     ['label' => 'Профиль', 'url' => '/'],
-                                    ['label' => 'Выход', 'url' => '/logout', 'linkOptions' =>
+                                    ['label' => 'Выход', 'url' => '/admin/logout', 'linkOptions' =>
                                         [
                                             'data-method' => 'post'
                                         ]
