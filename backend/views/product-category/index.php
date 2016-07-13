@@ -31,7 +31,6 @@ $columns =  [
                 'data-container' => '#cat-list',
                 'data-url' => $url,
                 'title' => Yii::t('yii', 'Delete'),
-                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                 ]);
             },
         ],
