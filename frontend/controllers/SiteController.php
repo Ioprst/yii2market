@@ -85,7 +85,7 @@ class SiteController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $productsQuery,
             'pagination' => [
-                'pageSize' => 10,
+                'pageSize' => 12,
             ],
         ]);
         return $this->render('//catalog/list', [
