@@ -127,7 +127,10 @@ class OptionController extends CommonController
 
     protected function saveOptionsValues($optionValues, $model)
     {
-       foreach ($optionValues as $optionValue) {
+        if (!isset($optionValues) || empty($optionValues))
+            return false;
+
+        foreach ($optionValues as $optionValue) {
             if ($optionValue['id']) {
                 $optionValueModel = OptionValue::findOne($optionValue['id']);
             } else {
